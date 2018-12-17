@@ -1,6 +1,6 @@
 ﻿namespace SimpleUDPListner
 {
-    partial class frm_UDP
+    partial class Frm_UDP
     {
         /// <summary>
         /// Required designer variable.
@@ -31,11 +31,6 @@
             this.cb_StartStopListening = new System.Windows.Forms.CheckBox();
             this.tlp_UDPListner = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.lbl_ReadCounter = new System.Windows.Forms.Label();
             this.lbl_LastDataTime = new System.Windows.Forms.Label();
             this.lbl_LabelReadCount = new System.Windows.Forms.Label();
@@ -47,14 +42,13 @@
             // 
             this.cb_StartStopListening.Appearance = System.Windows.Forms.Appearance.Button;
             this.cb_StartStopListening.AutoSize = true;
-            this.cb_StartStopListening.Location = new System.Drawing.Point(4, 6);
-            this.cb_StartStopListening.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cb_StartStopListening.Location = new System.Drawing.Point(3, 4);
             this.cb_StartStopListening.Name = "cb_StartStopListening";
-            this.cb_StartStopListening.Size = new System.Drawing.Size(122, 30);
+            this.cb_StartStopListening.Size = new System.Drawing.Size(84, 23);
             this.cb_StartStopListening.TabIndex = 1;
             this.cb_StartStopListening.Text = "Start Listening";
             this.cb_StartStopListening.UseVisualStyleBackColor = true;
-            this.cb_StartStopListening.CheckedChanged += new System.EventHandler(this.cb_StartStopListening_CheckedChanged);
+            this.cb_StartStopListening.CheckedChanged += new System.EventHandler(this.Cb_StartStopListening_CheckedChanged);
             // 
             // tlp_UDPListner
             // 
@@ -65,97 +59,33 @@
             this.tlp_UDPListner.Controls.Add(this.panel1, 0, 0);
             this.tlp_UDPListner.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_UDPListner.Location = new System.Drawing.Point(0, 0);
-            this.tlp_UDPListner.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tlp_UDPListner.Name = "tlp_UDPListner";
             this.tlp_UDPListner.RowCount = 2;
-            this.tlp_UDPListner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tlp_UDPListner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tlp_UDPListner.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlp_UDPListner.Size = new System.Drawing.Size(1200, 692);
+            this.tlp_UDPListner.Size = new System.Drawing.Size(800, 450);
             this.tlp_UDPListner.TabIndex = 2;
-            this.tlp_UDPListner.Paint += new System.Windows.Forms.PaintEventHandler(this.tlp_UDPListner_Paint);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gray;
             this.tlp_UDPListner.SetColumnSpan(this.panel1, 2);
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.lbl_ReadCounter);
             this.panel1.Controls.Add(this.lbl_LastDataTime);
             this.panel1.Controls.Add(this.lbl_LabelReadCount);
             this.panel1.Controls.Add(this.cb_StartStopListening);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(4, 5);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1192, 45);
+            this.panel1.Size = new System.Drawing.Size(794, 30);
             this.panel1.TabIndex = 2;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(1012, 6);
-            this.button5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(84, 29);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(781, 10);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(84, 29);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(668, 11);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(84, 29);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(562, 9);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(84, 29);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(410, 5);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 35);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lbl_ReadCounter
             // 
             this.lbl_ReadCounter.AutoSize = true;
-            this.lbl_ReadCounter.Location = new System.Drawing.Point(318, 14);
-            this.lbl_ReadCounter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_ReadCounter.Location = new System.Drawing.Point(212, 9);
             this.lbl_ReadCounter.Name = "lbl_ReadCounter";
-            this.lbl_ReadCounter.Size = new System.Drawing.Size(0, 20);
+            this.lbl_ReadCounter.Size = new System.Drawing.Size(0, 13);
             this.lbl_ReadCounter.TabIndex = 3;
             // 
             // lbl_LastDataTime
@@ -163,10 +93,9 @@
             this.lbl_LastDataTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_LastDataTime.AutoSize = true;
-            this.lbl_LastDataTime.Location = new System.Drawing.Point(874, 14);
-            this.lbl_LastDataTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_LastDataTime.Location = new System.Drawing.Point(582, 9);
             this.lbl_LastDataTime.Name = "lbl_LastDataTime";
-            this.lbl_LastDataTime.Size = new System.Drawing.Size(129, 20);
+            this.lbl_LastDataTime.Size = new System.Drawing.Size(88, 13);
             this.lbl_LastDataTime.TabIndex = 3;
             this.lbl_LastDataTime.Text = "Last Data Time : ";
             // 
@@ -175,24 +104,21 @@
             this.lbl_LabelReadCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_LabelReadCount.AutoSize = true;
-            this.lbl_LabelReadCount.Location = new System.Drawing.Point(166, 14);
-            this.lbl_LabelReadCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_LabelReadCount.Location = new System.Drawing.Point(111, 9);
             this.lbl_LabelReadCount.Name = "lbl_LabelReadCount";
-            this.lbl_LabelReadCount.Size = new System.Drawing.Size(156, 20);
+            this.lbl_LabelReadCount.Size = new System.Drawing.Size(105, 13);
             this.lbl_LabelReadCount.TabIndex = 2;
             this.lbl_LabelReadCount.Text = "DateRead Counter : ";
             // 
             // frm_UDP
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1200, 692);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tlp_UDPListner);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frm_UDP";
             this.Text = "UDP Listener";
-            this.Load += new System.EventHandler(this.frm_UDP_Load);
             this.tlp_UDPListner.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -207,11 +133,6 @@
         private System.Windows.Forms.Label lbl_ReadCounter;
         private System.Windows.Forms.Label lbl_LabelReadCount;
         private System.Windows.Forms.Label lbl_LastDataTime;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button5;
     }
 }
 

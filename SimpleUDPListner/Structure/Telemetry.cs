@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace SimpleUDPListner
 {
-    //[Serializable]
+    [Serializable]
     public class Telemetry : INotifyPropertyChanged
     {
-        //[field:NonSerialized]
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
@@ -26,10 +26,10 @@ namespace SimpleUDPListner
             }
         }
 
-        //[Serializable]
+        [Serializable]
         public class TimeStamp : INotifyPropertyChanged
         {
-            //[field:NonSerialized]
+            [field: NonSerialized]
             public event PropertyChangedEventHandler PropertyChanged;
             private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
             {
@@ -39,10 +39,10 @@ namespace SimpleUDPListner
                 }
             }
 
-            //[Serializable]
+            [Serializable]
             public class Date : INotifyPropertyChanged
             {
-                //[field:NonSerialized]
+                [field: NonSerialized]
                 public event PropertyChangedEventHandler PropertyChanged;                
                 private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
                 {
@@ -80,10 +80,10 @@ namespace SimpleUDPListner
                     set { if (value != this._Year) { this._Year = value; NotifyPropertyChanged(); } }
                 }
 
-                public Date()
-                {
-                    // Empty constructor required to compile.
-                }
+                //public Date()
+                //{
+                //    // Empty constructor required to compile.
+                //}
                 // Implement this method to serialize data. The method is called 
                 // on serialization.
                 //public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -106,10 +106,10 @@ namespace SimpleUDPListner
                 //}
 
             }
-            //[Serializable]
+            [Serializable]
             public class Time : INotifyPropertyChanged
             {
-                //[field:NonSerialized]
+                [field: NonSerialized]
                 public event PropertyChangedEventHandler PropertyChanged;                
                 private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
                 {
@@ -140,10 +140,10 @@ namespace SimpleUDPListner
                     set { if (value != this._Second) { this._Second = value; NotifyPropertyChanged(); } }
                 }
 
-                public Time()
-                {
-                    // Empty constructor required to compile.
-                }
+                //public Time()
+                //{
+                //    // Empty constructor required to compile.
+                //}
                 // Implement this method to serialize data. The method is called 
                 // on serialization.
                 //public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -168,6 +168,7 @@ namespace SimpleUDPListner
             //[field: NonSerialized]
             //public Time time = new Time();
 
+            [field: NonSerialized]
             private Date _date;
             public Date date
             {
@@ -175,6 +176,7 @@ namespace SimpleUDPListner
                 set { if (value != this._date) { this._date = value; NotifyPropertyChanged(); } }
             }
 
+            [field: NonSerialized]
             private Time _time;
             public Time time
             {
@@ -182,6 +184,7 @@ namespace SimpleUDPListner
                 set { if (value != this._time) { this._time = value; NotifyPropertyChanged(); } }
             }
 
+            [field: NonSerialized]
             public TimeStamp()
             {
                 _date = new Date();
@@ -203,13 +206,11 @@ namespace SimpleUDPListner
             //    _date = (Date)info.GetValue("props", typeof(Date));
             //    _time = (Time)info.GetValue("props", typeof(Time));
             //}
-
-
         }
-        //[Serializable]
+        [Serializable]
         public class Modules : INotifyPropertyChanged
         {
-            //[field:NonSerialized]
+            [field: NonSerialized]
             public event PropertyChangedEventHandler PropertyChanged;
             private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
             {
@@ -219,10 +220,10 @@ namespace SimpleUDPListner
                 }
             }
 
-            //[Serializable]
+            [Serializable]
             public class Canbus : INotifyPropertyChanged
             {
-                //[field:NonSerialized]
+                [field: NonSerialized]
                 public event PropertyChangedEventHandler PropertyChanged;
                 private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
                 {
@@ -351,10 +352,10 @@ namespace SimpleUDPListner
                     set { if (value != this._Control_Module_Voltage) { this._Control_Module_Voltage = value; NotifyPropertyChanged(); } }
                 }
 
-                public Canbus()
-                {
-                    // Empty constructor required to compile.
-                }
+                //public Canbus()
+                //{
+                //    // Empty constructor required to compile.
+                //}
                 // Implement this method to serialize data. The method is called 
                 // on serialization.
                 //public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -403,10 +404,10 @@ namespace SimpleUDPListner
                 //}
             }
 
-            //[Serializable]
+            [Serializable]
             public class MEMs : INotifyPropertyChanged
             {
-                //[field:NonSerialized]
+                [field: NonSerialized]
                 public event PropertyChangedEventHandler PropertyChanged;
                 private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
                 {
@@ -416,7 +417,7 @@ namespace SimpleUDPListner
                     }
                 }
 
-                //[Serializable]
+                [Serializable]
                 public class Acce : INotifyPropertyChanged
                 {
                     [field:NonSerialized]
@@ -450,10 +451,10 @@ namespace SimpleUDPListner
                         set { if (value != this._Az) { this._Az = value; NotifyPropertyChanged(); } }
                     }
 
-                    public Acce()
-                    {
-                        // Empty constructor required to compile.
-                    }
+                    //public Acce()
+                    //{
+                    //    // Empty constructor required to compile.
+                    //}
                     // Implement this method to serialize data. The method is called 
                     // on serialization.
                     //public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -472,10 +473,10 @@ namespace SimpleUDPListner
                     //    _Az = (Int32)info.GetValue("props", typeof(Int32));
                     //}
                 }
-                //[Serializable]
+                [Serializable]
                 public class Gyro : INotifyPropertyChanged
                 {
-                    //[field:NonSerialized]
+                    [field: NonSerialized]
                     public event PropertyChangedEventHandler PropertyChanged;
                     private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
                     {
@@ -506,10 +507,10 @@ namespace SimpleUDPListner
                         set { if (value != this._Gz) { this._Gz = value; NotifyPropertyChanged(); } }
                     }
 
-                    public Gyro()
-                    {
-                        // Empty constructor required to compile.
-                    }
+                    //public Gyro()
+                    //{
+                    //    // Empty constructor required to compile.
+                    //}
                     // Implement this method to serialize data. The method is called 
                     // on serialization.
                     //public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -529,10 +530,10 @@ namespace SimpleUDPListner
                     //}
                 }
 
-                //[Serializable]
+                [Serializable]
                 public class Magne : INotifyPropertyChanged
                 {
-                    //[field:NonSerialized]
+                    [field: NonSerialized]
                     public event PropertyChangedEventHandler PropertyChanged;
                     private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
                     {
@@ -563,10 +564,10 @@ namespace SimpleUDPListner
                         set { if (value != this._Mz) { this._Mz = value; NotifyPropertyChanged(); } }
                     }
 
-                    public Magne()
-                    {
-                        // Empty constructor required to compile.
-                    }
+                    //public Magne()
+                    //{
+                    //    // Empty constructor required to compile.
+                    //}
                     // Implement this method to serialize data. The method is called 
                     // on serialization.
                     //public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -593,6 +594,7 @@ namespace SimpleUDPListner
                 //[field: NonSerialized]
                 //public Magne magne = new Magne();
 
+                [field: NonSerialized]
                 private Acce _acce;
                 public Acce acce
                 {
@@ -600,6 +602,7 @@ namespace SimpleUDPListner
                     set { if (value != this._acce) { this._acce = value; NotifyPropertyChanged(); } }
                 }
 
+                [field: NonSerialized]
                 private Gyro _gyro;
                 public Gyro gyro
                 {
@@ -607,6 +610,7 @@ namespace SimpleUDPListner
                     set { if (value != this._gyro) { this._gyro = value; NotifyPropertyChanged(); } }
                 }
 
+                [field: NonSerialized]
                 private Magne _magne;
                 public Magne magne
                 {
@@ -614,6 +618,7 @@ namespace SimpleUDPListner
                     set { if (value != this._magne) { this._magne = value; NotifyPropertyChanged(); } }
                 }
 
+                [field: NonSerialized]
                 public MEMs()
                 {
                     _acce = new Acce();
@@ -640,10 +645,10 @@ namespace SimpleUDPListner
                 //}
             }
 
-            //[Serializable]
+            [Serializable]
             public class GPS : INotifyPropertyChanged
             {
-                //[field:NonSerialized]
+                [field: NonSerialized]
                 public event PropertyChangedEventHandler PropertyChanged;
                 private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
                 {
@@ -705,8 +710,8 @@ namespace SimpleUDPListner
                 private float _latitude;
                 public float latitude
                 {
-                    get { return this._longitude; }
-                    set { if (value != this._longitude) { this._longitude = value; NotifyPropertyChanged(); } }
+                    get { return this._latitude; }
+                    set { if (value != this._latitude) { this._latitude = value; NotifyPropertyChanged(); } }
                 }
 
                 private float _longitude;
@@ -719,8 +724,8 @@ namespace SimpleUDPListner
                 private Int32 _latitude_fixed;
                 public Int32 latitude_fixed
                 {
-                    get { return this._longitude_fixed; }
-                    set { if (value != this._longitude_fixed) { this._longitude_fixed = value; NotifyPropertyChanged(); } }
+                    get { return this._latitude_fixed; }
+                    set { if (value != this._latitude_fixed) { this._latitude_fixed = value; NotifyPropertyChanged(); } }
                 }
 
                 private Int32 _longitude_fixed;
@@ -821,10 +826,10 @@ namespace SimpleUDPListner
                     set { if (value != this._satellites) { this._satellites = value; NotifyPropertyChanged(); } }
                 }
 
-                public GPS()
-                {
-                    // Empty constructor required to compile.
-                }
+                //public GPS()
+                //{
+                //    // Empty constructor required to compile.
+                //}
                 // Implement this method to serialize data. The method is called 
                 // on serialization.
                 //public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -886,6 +891,7 @@ namespace SimpleUDPListner
                 //}
             }
 
+            [field: NonSerialized]
             private Canbus _canbus;
             public Canbus canbus
             {
@@ -893,6 +899,7 @@ namespace SimpleUDPListner
                 set { if (value != this._canbus) { this._canbus = value; NotifyPropertyChanged(); } }
             }
 
+            [field: NonSerialized]
             private MEMs _mems;
             public MEMs mems
             {
@@ -900,6 +907,7 @@ namespace SimpleUDPListner
                 set { if (value != this._mems) { this._mems = value; NotifyPropertyChanged(); } }
             }
 
+            [field: NonSerialized]
             private GPS _gps;
             public GPS gps
             {
@@ -907,6 +915,7 @@ namespace SimpleUDPListner
                 set { if (value != this._gps) { this._gps = value; NotifyPropertyChanged(); } }
             }
 
+            [field: NonSerialized]
             public Modules()
             {
                 _canbus = new Canbus();
@@ -931,15 +940,14 @@ namespace SimpleUDPListner
             //    _mems = (MEMs)info.GetValue("props", typeof(MEMs));
             //    _gps = (GPS)info.GetValue("props", typeof(GPS));
             //}
-
         }
 
         //[field: NonSerialized]
         //public TimeStamp timeStamp = new TimeStamp();
         //[field: NonSerialized]
         //public  Modules modules = new Modules();
-        
-        
+
+        [field: NonSerialized]
         private TimeStamp _timeStamp;
         public TimeStamp timeStamp
         {
@@ -947,6 +955,7 @@ namespace SimpleUDPListner
             set { if (value != this._timeStamp) { this._timeStamp = value; NotifyPropertyChanged(); } }
         }
 
+        [field: NonSerialized]
         private Modules _modules;
         public Modules modules
         {
@@ -970,14 +979,12 @@ namespace SimpleUDPListner
         //    _timeStamp = (TimeStamp)info.GetValue("props", typeof(TimeStamp));
         //    _modules = (Modules)info.GetValue("props", typeof(Modules));
         //}
-
+        [field: NonSerialized]
         public Telemetry()
         {
             _timeStamp = new TimeStamp();
             _modules = new Modules();
         }
-
-
        
         public void CopyByteArrayToThis(byte[] byteArray)
         {
@@ -1160,11 +1167,17 @@ namespace SimpleUDPListner
         }
         public void Reset()
         {
-            Dictionary<PropertyInfo, object> pis = GetAllInstancePropertyInfos(); 
-            foreach(KeyValuePair<PropertyInfo, object> kvp in pis)
+            //Dictionary<PropertyInfo, object> pis = GetAllInstancePropertyInfos(); 
+            //foreach(KeyValuePair<PropertyInfo, object> kvp in pis)
+            //{
+            //    var resetValue = 0;
+            //    kvp.Key.SetValue(kvp.Value, null);
+            //}
+
+            Dictionary<PropertyInfo, object> instanceProps = this.GetPropertyInfos(this, null);
+            foreach (KeyValuePair<PropertyInfo, object> entry in instanceProps)
             {
-                var resetValue = 0;
-                kvp.Key.SetValue(kvp.Value, null);
+                entry.Key.SetValue(entry.Value, null);
             }
         }
         //public byte[] ObjectToByteArray(Object obj)

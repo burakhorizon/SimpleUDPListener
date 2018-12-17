@@ -16,7 +16,7 @@ namespace SimpleUDPListner
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frm_UDP());
+            Application.Run(new Frm_UDP());
         }
     }
 }

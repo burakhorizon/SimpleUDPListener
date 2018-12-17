@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace SimpleUDPListner
 {
-    public partial class frm_UDP : Form
+    public partial class Frm_UDP : Form
     {
         UDPListener m_udpListener;
         Writer writer;
@@ -23,16 +23,17 @@ namespace SimpleUDPListner
         Telemetry telemetry;
         System.Windows.Forms.Timer DataReceiveResolutionTimer = new System.Windows.Forms.Timer();
         UInt64 dataReadCounter;
-        UInt64 dataReadCounter1;
 
-        public frm_UDP()
+        public Frm_UDP()
         {
             InitializeComponent();
             this.FormClosing += Frm_UDP_FormClosing;
             m_udpListener = new UDPListener(23);
 
-            writer = new Writer();
-            writer.Filepath = LogFile;
+            writer = new Writer
+            {
+                Filepath = LogFile
+            };
 
             DataReceiveResolutionTimer.Interval = 1000;
             DataReceiveResolutionTimer.Tick += DataReceiveResolutionTimer_Tick;
@@ -46,9 +47,11 @@ namespace SimpleUDPListner
 
         private void InitControls()
         {
-            ucontrolBody = new AutoControlBody();
-            ucontrolBody.Dock = DockStyle.Fill;
-            ucontrolBody.InitFeaturedTableLayoutPanelForTelemetry(telemetry, mtx_Validated);
+            ucontrolBody = new AutoControlBody
+            {
+                Dock = DockStyle.Fill
+            };
+            ucontrolBody.InitFeaturedTableLayoutPanelForTelemetry(telemetry, Mtx_Validated);
             this.tlp_UDPListner.Controls.Add(ucontrolBody);
             this.tlp_UDPListner.SetCellPosition(ucontrolBody, new TableLayoutPanelCellPosition(0, 1));
             this.tlp_UDPListner.SetColumnSpan(ucontrolBody, 2);
@@ -76,14 +79,16 @@ namespace SimpleUDPListner
                 BunifuMaterialTextbox mtx = (BunifuMaterialTextbox)Utils.Utils.GetControlByName(ucontrolBody.flp_FlowLayoutPanel, "mtx_" + ((PropertyInfo)entry.Key).Name);
                 mtx.AccessibleDescription = ((PropertyInfo)entry.Key).PropertyType.Name.ToString();
                 mtx.AccessibleName = ((PropertyInfo)entry.Key).Name.ToString();
-                Binding binding = new Binding(mtx.AccessibleDescription == "bool" ? "Checked" : "Text", entry.Value, mtx.AccessibleName);
-                binding.DataSourceUpdateMode = DataSourceUpdateMode.Never;
-                binding.ControlUpdateMode = ControlUpdateMode.Never;
+                Binding binding = new Binding(mtx.AccessibleDescription == "bool" ? "Checked" : "Text", entry.Value, mtx.AccessibleName)
+                {
+                    DataSourceUpdateMode = DataSourceUpdateMode.Never,
+                    ControlUpdateMode = ControlUpdateMode.Never
+                };
                 bool ret = Utils.DataBindingHandlers.Delegator(mtx, binding);
                 mtx.DataBindings.Add(binding);
             }
         }
-        private void mtx_Validated(object sender, EventArgs e)
+        private void Mtx_Validated(object sender, EventArgs e)
         {
             if (((BunifuMaterialTextbox)sender).DataBindings.Cast<Binding>().Any(binding => binding.PropertyName == "Text"))
             {
@@ -171,7 +176,7 @@ namespace SimpleUDPListner
                 }
             }
         }
-        private void cb_StartStopListening_CheckedChanged(object sender, EventArgs e)
+        private void Cb_StartStopListening_CheckedChanged(object sender, EventArgs e)
         {
             if (((CheckBox)sender).Checked == false)
             {
@@ -195,7 +200,7 @@ namespace SimpleUDPListner
         public class Writer
         {
             public string Filepath { get; set; }
-            private static object locker = new Object();
+            private static readonly object locker = new Object();
 
             public void WriteToFile(StringBuilder text)
             {
@@ -209,72 +214,6 @@ namespace SimpleUDPListner
                 }
 
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //byte[] ba = telemetry.ObjectToByteArray(telemetry);
-
-            ////Array.Clear(ba, 0, ba.Length);
-            //byte[] ba1 = telemetry.ObjectToByteArray(telemetry);
-            ////Telemetry.TimeStamp.Date  d = (Telemetry.TimeStamp.Date)telemetry.ByteArrayToObject(ba);
-            //Telemetry d = (Telemetry)telemetry.ByteArrayToObject(ba);
-
-            telemetry.modules.canbus.RPM = 111;
-            telemetry.timeStamp.date.WeekDay = 55;
-            telemetry.timeStamp.date.Month = 56;
-            telemetry.timeStamp.date.Day = 57;
-            telemetry.timeStamp.date.Year = 58;
-            this.ValidateChildren();
-
-        }
-        byte[] bbb;
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //telemetry.Serialize();
-            //bbb = telemetry.SerializeObject(telemetry);
-            this.ValidateChildren();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            telemetry.modules.canbus.RPM = 22;
-            this.ValidateChildren();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            ////telemetry.DeserializeItem();
-            //byte k = 1;
-            //for (int i = 720; i < 720 + 4; i++)
-            //{
-            //    bbb[i] = k++;
-            //}
-            //Telemetry ttt = telemetry.DeserializeObject<Telemetry>(bbb);
-            ////for (int i = 0; i < bbb.Length - 4; i++)
-            ////{team
-            ////    if(bbb[i] == 55 && bbb[i+1] == 56 && bbb[i+2] == 57 && bbb[i+3] == 58)
-            ////    {
-            ////        Console.WriteLine("");
-            ////    }
-            ////}
-            this.ValidateChildren();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            telemetry.Reset();
-            this.ValidateChildren();
-        }
-
-        private void tlp_UDPListner_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void frm_UDP_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

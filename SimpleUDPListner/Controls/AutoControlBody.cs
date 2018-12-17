@@ -9,7 +9,6 @@ namespace SimpleUDPListner
 {
     public partial class AutoControlBody : UserControl
     {
-        FeaturedTableLayoutPanel featuredTableLayoutPanel;
         
         public AutoControlBody()
         {
@@ -138,19 +137,21 @@ namespace SimpleUDPListner
         }
         private BunifuCustomLabel CreateLabel(string propertyName)
         {
-            BunifuCustomLabel lbl = new BunifuCustomLabel();
-            lbl.Name = "lbl_" + propertyName;
-            lbl.Text = propertyName.Replace("_", " ");
+            BunifuCustomLabel lbl = new BunifuCustomLabel
+            {
+                Name = "lbl_" + propertyName,
+                Text = propertyName.Replace("_", " "),
 
-            lbl.AutoSize = true;
-            lbl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            lbl.Font = new System.Drawing.Font("Century Gothic", 9F);
-            lbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
-            lbl.Location = new System.Drawing.Point(0, 57);
-            lbl.Margin = new System.Windows.Forms.Padding(0);
-            lbl.Size = new System.Drawing.Size(208, 20);
-            lbl.TabIndex = 0;
-            lbl.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+                AutoSize = true,
+                Dock = System.Windows.Forms.DockStyle.Bottom,
+                Font = new System.Drawing.Font("Century Gothic", 9F),
+                ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65))))),
+                Location = new System.Drawing.Point(0, 57),
+                Margin = new System.Windows.Forms.Padding(0),
+                Size = new System.Drawing.Size(208, 20),
+                TabIndex = 0,
+                TextAlign = System.Drawing.ContentAlignment.BottomLeft
+            };
 
             return lbl;
         }
