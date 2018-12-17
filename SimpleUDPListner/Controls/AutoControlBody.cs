@@ -18,14 +18,11 @@ namespace SimpleUDPListner
 
         public void InitFeaturedTableLayoutPanelForTelemetry(Telemetry telemetry, EventHandler validatedEventHandler)
         {
-            //Dictionary<PropertyInfo, bool> pis = Utils.Utils.GetAllNestedProps(typeof(Telemetry));
-            //Dictionary<PropertyInfo, object> pis = Utils.Utils.GetPropertInfos(telemetry, null);
-
             List<Type> types = Utils.Utils.GetAllNestedTypes(typeof(Telemetry));
 
             foreach (Type t in types)
             {
-                if (t.IsNested && Utils.Utils.GetPropertInfos(t, null).Keys.Count == 0)
+                if (t.GetNestedTypes(BindingFlags.Public).Length > 0)
                 {
                     FeaturedFlowLayoutPanel fFlp = new FeaturedFlowLayoutPanel();
                     fFlp.lbl_Title.Text = t.Name;
@@ -40,7 +37,7 @@ namespace SimpleUDPListner
                         parentFflp.flp_Fflp.Controls.Add(fFlp);
                     }
                 }
-                else if (t.IsNested && Utils.Utils.GetPropertInfos(t, null).Keys.Count != 0)
+                else // if (t.IsNested && Utils.Utils.GetPropertyInfos(t, null).Keys.Count = 0)
                 {
                     FeaturedTableLayoutPanel fTlp = new FeaturedTableLayoutPanel();
                     fTlp.lbl_Title.Text = t.Name;
@@ -59,14 +56,18 @@ namespace SimpleUDPListner
 
             foreach (Type t in types)
             {
-                foreach (PropertyInfo pi in Utils.Utils.GetPropertInfos(t, null).Keys)
+                if (t.GetNestedTypes().Length == 0)
                 {
-                    ModelTypeDef mtd = new ModelTypeDef(pi);
-                    Label label = CreateLabel(pi.Name);
-                    Control dedicatedControl = CreateDedicatedControl(mtd, null, validatedEventHandler);
-                    FeaturedTableLayoutPanel parentFtp = (FeaturedTableLayoutPanel)Utils.Utils.GetControlByName(flp_FlowLayoutPanel, "fTlp_" + pi.ReflectedType.Name);
-                    AddRow(parentFtp, label, dedicatedControl);
-                    AddTableRow(parentFtp, 10F);
+                    Dictionary<PropertyInfo, object> pis = Utils.Utils.GetPropertyInfos(t, null);
+                    foreach (PropertyInfo pi in pis.Keys)
+                    {
+                        ModelTypeDef mtd = new ModelTypeDef(pi);
+                        Label label = CreateLabel(pi.Name);
+                        Control dedicatedControl = CreateDedicatedControl(mtd, null, validatedEventHandler);
+                        FeaturedTableLayoutPanel parentFtp = (FeaturedTableLayoutPanel)Utils.Utils.GetControlByName(flp_FlowLayoutPanel, "fTlp_" + pi.ReflectedType.Name);
+                        AddRow(parentFtp, label, dedicatedControl);
+                        AddTableRow(parentFtp, 10F);
+                    }
                 }
             }
         }
@@ -88,51 +89,7 @@ namespace SimpleUDPListner
                 ((BunifuMaterialTextbox)control).Size = new System.Drawing.Size(20, 20);
                 ((BunifuMaterialTextbox)control).Dock = DockStyle.Fill;
             }
-            else if (mtd.dataType == "string")
-            {
-                control = new BunifuMaterialTextbox();
-                ((BunifuMaterialTextbox)control).Name = "mtx_" + mtd.propertyName;
-                ((BunifuMaterialTextbox)control).HintText = "";
-                //((BunifuMaterialTextbox)control).MaxLength = mtd.maxLength;
-                //((BunifuMaterialTextbox)control).MaximumSize = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                //((BunifuMaterialTextbox)control).MinimumSize = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                //((BunifuMaterialTextbox)control).Size = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                ((BunifuMaterialTextbox)control).Dock = DockStyle.Fill;
-            }
-            else if (mtd.dataType == "telephoneString")
-            {
-                control = new BunifuMaterialTextbox();
-                ((BunifuMaterialTextbox)control).Name = "mtx_" + mtd.propertyName;
-                ((BunifuMaterialTextbox)control).HintText = "00 XX XXX XX XX";
-                //((BunifuMaterialTextbox)control).MaxLength = mtd.maxLength;
-                //((BunifuMaterialTextbox)control).MaximumSize = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                //((BunifuMaterialTextbox)control).MinimumSize = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                //((BunifuMaterialTextbox)control).Size = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                ((BunifuMaterialTextbox)control).Dock = DockStyle.Fill;
-            }
-            else if (mtd.dataType == "eMailString")
-            {
-                control = new BunifuMaterialTextbox();
-                ((BunifuMaterialTextbox)control).Name = "mtx_" + mtd.propertyName;
-                ((BunifuMaterialTextbox)control).HintText = "name@example.com";
-                //((BunifuMaterialTextbox)control).MaxLength = mtd.maxLength;
-                //((BunifuMaterialTextbox)control).MaximumSize = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                //((BunifuMaterialTextbox)control).MinimumSize = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                //((BunifuMaterialTextbox)control).Size = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                ((BunifuMaterialTextbox)control).Dock = DockStyle.Fill;
-            }
-            else if (mtd.dataType == "doubleCurrency")
-            {
-                control = new BunifuMaterialTextbox();
-                ((BunifuMaterialTextbox)control).Name = "mtx_" + mtd.propertyName;
-                ((BunifuMaterialTextbox)control).HintText = "€ 000.0000";
-                //((BunifuMaterialTextbox)control).MaxLength = mtd.maxLength;
-                //((BunifuMaterialTextbox)control).MaximumSize = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                //((BunifuMaterialTextbox)control).MinimumSize = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                //((BunifuMaterialTextbox)control).Size = new System.Drawing.Size(mtd.maxLength * 8, 37);
-                ((BunifuMaterialTextbox)control).Dock = DockStyle.Fill;
-            }
-
+            
             control.AccessibleName = mtd.propertyName;
             control.AccessibleDescription = mtd.dataType;
 

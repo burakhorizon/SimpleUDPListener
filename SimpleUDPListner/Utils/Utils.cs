@@ -135,7 +135,7 @@ namespace Utils
             outClass = intermediateOutClass;
             return (PropertyInfo)intermediateOutClass;
         }
-        public static Dictionary<PropertyInfo, object> GetPropertInfos(object myClass, List<string> Exceptions)
+        public static Dictionary<PropertyInfo, object> GetPropertyInfos(object myClass, List<string> Exceptions)
         {
             Dictionary<PropertyInfo, object> propertyInfos = new Dictionary<PropertyInfo, object>();
             //PropertyInfo pi = null;
@@ -154,7 +154,7 @@ namespace Utils
                     }
                     else if (!pinf.PropertyType.IsArray && pinf.PropertyType.IsClass)
                     {
-                        pi2 = GetPropertInfos(pinf.GetValue(myClass), Exceptions);
+                        pi2 = GetPropertyInfos(pinf.GetValue(myClass), Exceptions);
                         if (pi2 != null)
                         {
                             foreach (KeyValuePair<PropertyInfo, object> entry in pi2)
@@ -168,7 +168,7 @@ namespace Utils
 
             return propertyInfos;
         }
-        public static Dictionary<PropertyInfo, object> GetPropertInfos(Type myClassType, List<string> Exceptions)
+        public static Dictionary<PropertyInfo, object> GetPropertyInfos(Type myClassType, List<string> Exceptions)
         {
             Dictionary<PropertyInfo, object> propertyInfos = new Dictionary<PropertyInfo, object>();
             //PropertyInfo pi = null;
@@ -181,13 +181,13 @@ namespace Utils
             {
                 if (Exceptions == null || !Exceptions.Contains(pinf.Name))
                 {
-                    if (!pinf.PropertyType.IsClass || pinf.PropertyType == typeof(string))
+                    if ((!pinf.PropertyType.IsClass && pinf.PropertyType.GetNestedTypes().Length == 0) || pinf.PropertyType == typeof(string)) //!pinf.PropertyType.IsClass || pinf.PropertyType == typeof(string))
                     {
                         propertyInfos.Add(pinf, myClassType);
                     }
                     else if (!pinf.PropertyType.IsArray && pinf.PropertyType.IsClass)
                     {
-                        pi2 = GetPropertInfos(pinf.GetValue(myClassType), Exceptions);
+                        pi2 = GetPropertyInfos(pinf.PropertyType /* pinf.GetValue(myClassType) */, Exceptions);
                         if (pi2 != null)
                         {
                             foreach (KeyValuePair<PropertyInfo, object> entry in pi2)

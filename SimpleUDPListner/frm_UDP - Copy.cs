@@ -264,17 +264,6 @@ namespace SimpleUDPListner
         private void button5_Click(object sender, EventArgs e)
         {
             telemetry.Reset();
-            this.ValidateChildren();
-        }
-
-        private void tlp_UDPListner_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void frm_UDP_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
