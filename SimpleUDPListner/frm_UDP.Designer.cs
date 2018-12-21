@@ -34,6 +34,7 @@
             this.lbl_ReadCounter = new System.Windows.Forms.Label();
             this.lbl_LastDataTime = new System.Windows.Forms.Label();
             this.lbl_LabelReadCount = new System.Windows.Forms.Label();
+            this.lbl_ChecksumErrorCounter = new System.Windows.Forms.Label();
             this.tlp_UDPListner.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -70,6 +71,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Gray;
             this.tlp_UDPListner.SetColumnSpan(this.panel1, 2);
+            this.panel1.Controls.Add(this.lbl_ChecksumErrorCounter);
             this.panel1.Controls.Add(this.lbl_ReadCounter);
             this.panel1.Controls.Add(this.lbl_LastDataTime);
             this.panel1.Controls.Add(this.lbl_LabelReadCount);
@@ -110,14 +112,25 @@
             this.lbl_LabelReadCount.TabIndex = 2;
             this.lbl_LabelReadCount.Text = "DateRead Counter : ";
             // 
-            // frm_UDP
+            // lbl_ChecksumErrorCounter
+            // 
+            this.lbl_ChecksumErrorCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl_ChecksumErrorCounter.AutoSize = true;
+            this.lbl_ChecksumErrorCounter.Location = new System.Drawing.Point(304, 9);
+            this.lbl_ChecksumErrorCounter.Name = "lbl_ChecksumErrorCounter";
+            this.lbl_ChecksumErrorCounter.Size = new System.Drawing.Size(122, 13);
+            this.lbl_ChecksumErrorCounter.TabIndex = 4;
+            this.lbl_ChecksumErrorCounter.Text = "Checksum Error Count : ";
+            // 
+            // Frm_UDP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tlp_UDPListner);
-            this.Name = "frm_UDP";
+            this.Name = "Frm_UDP";
             this.Text = "UDP Listener";
             this.tlp_UDPListner.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -133,6 +146,7 @@
         private System.Windows.Forms.Label lbl_ReadCounter;
         private System.Windows.Forms.Label lbl_LabelReadCount;
         private System.Windows.Forms.Label lbl_LastDataTime;
+        private System.Windows.Forms.Label lbl_ChecksumErrorCounter;
     }
 }
 

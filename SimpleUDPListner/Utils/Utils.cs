@@ -326,7 +326,20 @@ namespace Utils
             //}
         }
 
-        
+        public static UInt32 Adler32(byte[] data, UInt16 len)
+        {
+            UInt32 a = 1, b = 0, MOD_ADLER = 65521;
+            UInt16 index;
+
+            // Process each byte of the data in order
+            for (index = 0; index < len; ++index)
+            {
+                a = (a + data[index]) % MOD_ADLER;
+                b = (b + a) % MOD_ADLER;
+            }
+
+            return (b << 16) | a;
+        }
 
         //public string GetMemberDBTypeByName(string memberName)
         //{

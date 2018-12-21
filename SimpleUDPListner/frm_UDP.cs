@@ -22,7 +22,7 @@ namespace SimpleUDPListner
         AutoControlBody ucontrolBody;
         Telemetry telemetry;
         System.Windows.Forms.Timer DataReceiveResolutionTimer = new System.Windows.Forms.Timer();
-        UInt64 dataReadCounter;
+        UInt64 dataReadCounter, checksumErrorCounter;
 
         public Frm_UDP()
         {
@@ -41,9 +41,7 @@ namespace SimpleUDPListner
             telemetry = new Telemetry();
             InitControls();
             telemetry.Reset();
-        }
-
-        
+        }       
 
         private void InitControls()
         {
@@ -110,6 +108,7 @@ namespace SimpleUDPListner
         private void DataReceiveResolutionTimer_Tick(object sender, EventArgs e)
         {
             DataReceiveResolutionTimer.Stop();
+            DataReceiveResolutionTimer.Enabled = false;
 
             if (this.InvokeRequired)
             {
@@ -148,18 +147,41 @@ namespace SimpleUDPListner
             //writer.WriteToFile(myString);
 
             dataReadCounter++;
-            telemetry.CopyByteArrayToThis(e.data);
+            UInt16 headerSize = 2;
+            UInt16 checksumLen = 4;
+            UInt16 messageLen = BitConverter.ToUInt16(e.data, 2);
+            if (e.data.Length >= messageLen + checksumLen)
+            {
+                byte[] message = e.data.Skip(headerSize).Take(messageLen).ToArray();
+                byte[] chk = message.Skip(messageLen - checksumLen).Take(checksumLen).ToArray();
+                UInt32 checksum = BitConverter.ToUInt32(chk, 0);
 
+                if (Utils.Utils.Adler32(message, (UInt16)(messageLen - checksumLen)) == checksum)
+                {
+                    telemetry.CopyByteArrayToThis(e.data.Skip(24).Take(BitConverter.ToUInt16(e.data, 22)).ToArray());
+                    HighLigtLabel(lbl_ReadCounter, dataReadCounter.ToString());
+                }
+                else
+                {
+                    checksumErrorCounter++;
+                    HighLigtLabel(lbl_ChecksumErrorCounter, "Checksum Error Count : " + checksumErrorCounter.ToString());
+                }
+            }
+        }
+
+        private void HighLigtLabel(Label lbl, string v)
+        {
             if (this.InvokeRequired)
             {
                 this.Invoke((MethodInvoker)(delegate
                 {
                     if (!DataReceiveResolutionTimer.Enabled)
                     {
-                        lbl_ReadCounter.ForeColor = Color.FromArgb(229, 126, 49);
-                        lbl_ReadCounter.Font = new Font(lbl_ReadCounter.Font, FontStyle.Bold);
-                        lbl_ReadCounter.Text = dataReadCounter.ToString();
+                        lbl.ForeColor = Color.FromArgb(229, 126, 49);
+                        lbl.Font = new Font(lbl.Font, FontStyle.Bold);
+                        lbl.Text = v;
                         lbl_LastDataTime.Text = "Last Data Time : " + DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss");
+                        DataReceiveResolutionTimer.Enabled = true;
                         DataReceiveResolutionTimer.Start();
                     }
                 }));
@@ -168,13 +190,16 @@ namespace SimpleUDPListner
             {
                 if (!DataReceiveResolutionTimer.Enabled)
                 {
-                    lbl_ReadCounter.ForeColor = Color.FromArgb(229, 126, 49);
-                    lbl_ReadCounter.Font = new Font(lbl_ReadCounter.Font, FontStyle.Bold);
-                    lbl_ReadCounter.Text = dataReadCounter.ToString();
+                    lbl.ForeColor = Color.FromArgb(229, 126, 49);
+                    lbl.Font = new Font(lbl.Font, FontStyle.Bold);
+                    lbl.Text = v;
                     lbl_LastDataTime.Text = "Last Data Time : " + DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss");
+                    DataReceiveResolutionTimer.Enabled = true;
                     DataReceiveResolutionTimer.Start();
                 }
             }
+
+           
         }
         private void Cb_StartStopListening_CheckedChanged(object sender, EventArgs e)
         {
@@ -190,7 +215,10 @@ namespace SimpleUDPListner
                 DataReceiveResolutionTimer.Start();
 
                 dataReadCounter = 0;
+                checksumErrorCounter = 0;
                 lbl_ReadCounter.Text = dataReadCounter.ToString();
+                lbl_ChecksumErrorCounter.Text = "Checksum Error Count : " + checksumErrorCounter.ToString();
+                lbl_LastDataTime.Text = "Last Data Time : ";
                 ((CheckBox)sender).Text = "Stop Listening";
 
                 m_udpListener.StartListener(M_udpListener_NewMessageReceived);
