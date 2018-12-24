@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TelemetryDataSet" targetNamespace="http://tempuri.org/TelemetryDataSet.xsd" xmlns:mstns="http://tempuri.org/TelemetryDataSet.xsd" xmlns="http://tempuri.org/TelemetryDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="TelemetryConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="TelemetryConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SimpleUDPListner.Properties.Settings.GlobalReference.Default.TelemetryConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AcceTableAdapter" GeneratorDataComponentClassName="AcceTableAdapter" Name="Acce" UserDataComponentName="AcceTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="TelemetryConnectionString (Settings)" DbObjectName="dbo.Acce" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Id, Ax, Ay, Az FROM dbo.Acce</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Id" DataSetColumn="Id" />
+              <Mapping SourceColumn="Ax" DataSetColumn="Ax" />
+              <Mapping SourceColumn="Ay" DataSetColumn="Ay" />
+              <Mapping SourceColumn="Az" DataSetColumn="Az" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TelemetryDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="TelemetryDataSet" msprop:Generator_UserDSName="TelemetryDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Acce" msprop:Generator_TableClassName="AcceDataTable" msprop:Generator_TableVarName="tableAcce" msprop:Generator_TablePropName="Acce" msprop:Generator_RowDeletingName="AcceRowDeleting" msprop:Generator_RowChangingName="AcceRowChanging" msprop:Generator_RowEvHandlerName="AcceRowChangeEventHandler" msprop:Generator_RowDeletedName="AcceRowDeleted" msprop:Generator_UserTableName="Acce" msprop:Generator_RowChangedName="AcceRowChanged" msprop:Generator_RowEvArgName="AcceRowChangeEvent" msprop:Generator_RowClassName="AcceRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Ax" msprop:Generator_ColumnVarNameInTable="columnAx" msprop:Generator_ColumnPropNameInRow="Ax" msprop:Generator_ColumnPropNameInTable="AxColumn" msprop:Generator_UserColumnName="Ax" type="xs:int" minOccurs="0" />
+              <xs:element name="Ay" msprop:Generator_ColumnVarNameInTable="columnAy" msprop:Generator_ColumnPropNameInRow="Ay" msprop:Generator_ColumnPropNameInTable="AyColumn" msprop:Generator_UserColumnName="Ay" type="xs:int" minOccurs="0" />
+              <xs:element name="Az" msprop:Generator_ColumnVarNameInTable="columnAz" msprop:Generator_ColumnPropNameInRow="Az" msprop:Generator_ColumnPropNameInTable="AzColumn" msprop:Generator_UserColumnName="Az" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

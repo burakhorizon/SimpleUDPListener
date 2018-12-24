@@ -324,11 +324,18 @@ namespace Utils
         }
         public static void StringToSingle(object sender, ConvertEventArgs cevent)
         {
-            // The method converts back to double type only. 
-            if (cevent.DesiredType != typeof(float) || (string)cevent.Value == "") return;
+            try
+            {
+                // The method converts back to double type only. 
+                if (cevent.DesiredType != typeof(float) || (string)cevent.Value == "") return;
 
-            // Converts the string back to double using the static Parse method.                       
-            cevent.Value = TruncateDecimal(Decimal.Parse(Regex.Match(cevent.Value.ToString(), @"[0-9]+(?:\.[0-9]+)?").Value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture), 4);
+                // Converts the string back to double using the static Parse method.                       
+                cevent.Value = TruncateDecimal(Decimal.Parse(Regex.Match(cevent.Value.ToString(), @"[0-9]+(?:\.[0-9]+)?").Value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture), 4);
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
 
@@ -626,17 +633,24 @@ namespace Utils
         }
         public static void StringToChar(object sender, ConvertEventArgs cevent)
         {
-            // The method converts back to double type only. 
-            if (cevent.DesiredType != typeof(Char) || (string)cevent.Value == "") return;
+            try
+            {
+                // The method converts back to double type only. 
+                if (cevent.DesiredType != typeof(Char) || (string)cevent.Value == "") return;
 
-            // Converts the string back to double using the static Parse method.
-            if (UInt16.Parse(cevent.Value.ToString()) > Char.MaxValue)
-            {
-                cevent.Value = 0;
+                // Converts the string back to double using the static Parse method.
+                if (UInt16.Parse(cevent.Value.ToString()) > Char.MaxValue)
+                {
+                    cevent.Value = 0;
+                }
+                else
+                {
+                    cevent.Value = Char.Parse(cevent.Value.ToString());
+                }
             }
-            else
+            catch(Exception ex)
             {
-                cevent.Value = Char.Parse(cevent.Value.ToString());
+
             }
         }
 

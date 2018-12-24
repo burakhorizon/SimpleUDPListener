@@ -14,6 +14,21 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -39,6 +54,9 @@
     <Reference Include="Bunifu.Core, Version=1.5.5.2, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9">
       <HintPath>..\..\..\..\..\..\Apps\Engineering\Bunifu UI WinForms 1.5.6.0\Bunifu.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Bunifu.UI.WinForm.BunifuShadowPanel">
+      <HintPath>..\..\..\..\..\Apps\Engineering\Bunifu UI WinForms 1.5.6.0\Bunifu.UI.WinForm.BunifuShadowPanel.dll</HintPath>
+    </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuButton">
       <HintPath>..\..\..\..\..\..\Apps\Engineering\Bunifu UI WinForms 1.5.6.0\Bunifu.UI.WinForms.BunifuButton.dll</HintPath>
     </Reference>
@@ -57,6 +75,7 @@
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,6 +87,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\TelemetryDataSet.cs">
+      <DependentUpon>TelemetryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TelemetryDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TelemetryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AllData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AllData.Designer.cs">
+      <DependentUpon>AllData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AutoControlBody.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -97,7 +130,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structure\Telemetry.cs" />
     <Compile Include="UDPListener.cs" />
+    <Compile Include="UserControls\MemsData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MemsData.Designer.cs">
+      <DependentUpon>MemsData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\DataBindingHandlers.cs" />
+    <Compile Include="Utils\FileWriter.cs" />
     <Compile Include="Utils\ObjectSerializer.cs" />
     <Compile Include="Utils\TabOrderManager.cs" />
     <Compile Include="Utils\TabSchemeProvider.cs">
@@ -125,6 +165,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\MemsData.resx">
+      <DependentUpon>MemsData.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -135,14 +178,44 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Data\TelemetryDataSet.xsc">
+      <DependentUpon>TelemetryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Data\TelemetryDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TelemetryDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Data\TelemetryDataSet.xss">
+      <DependentUpon>TelemetryDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Telemetry.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Telemetry_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Telemetry.mdf</DependentUpon>
+    </Content>
     <Content Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

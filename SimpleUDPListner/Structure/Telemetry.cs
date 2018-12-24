@@ -1244,6 +1244,33 @@ namespace SimpleUDPListner
                 return (T)formatter.Deserialize(stream);
             }
         }
+
+        public void CopyTo(Telemetry t)
+        {
+            foreach (var property in this.GetType().GetProperties())
+            {
+                PropertyInfo propertyS = t.GetType().GetProperty(property.Name);
+                var value = property.GetValue(this, null);
+                propertyS.SetValue(t, property.GetValue(this, null), null);
+            }
+        }
+        public void CopyFrom(object t, object innerClass, bool CopyId)
+        {
+            PropertyInfo propertyS = null;
+            foreach (var property in (innerClass == null ? this.GetType().GetProperties() : innerClass.GetType().GetProperties()))
+            {
+                propertyS = t.GetType().GetProperty(property.Name);
+                if (!property.PropertyType.IsClass || property.PropertyType == typeof(string))
+                {
+                    var value = property.GetValue(t, null);
+                    propertyS.SetValue(innerClass == null ? this : innerClass, property.GetValue(t, null));
+                }
+                else if (!property.PropertyType.IsArray && property.PropertyType.IsClass)
+                {
+                    CopyFrom(property.GetValue(t, null), propertyS.GetValue(innerClass == null ? this : innerClass, null), CopyId);
+                }
+            }
+        }
     }
 
     public static class ObjectExtension
